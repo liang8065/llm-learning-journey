@@ -4,75 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>名著改写器 - 经典文学风格转换</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>📚 名著改写器</h1>
-            <p class="subtitle">让经典文学焕发新生</p>
-        </header>
-
-        <main>
-            <!-- 输入区域 -->
-            <section class="section input-section">
-                <h2>📝 输入原文</h2>
-                <div class="input-options">
-                    <button id="btn-paste" class="btn btn-primary">粘贴文本</button>
-                    <button id="btn-upload" class="btn btn-secondary">上传文件</button>
-                    <input type="file" id="file-input" accept=".txt" style="display: none;">
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="navbar-brand">
+                    <span class="brand-icon">📚</span>
+                    <h1>名著改写器</h1>
                 </div>
-                <textarea id="input-text" placeholder="在此粘贴或输入要改写的经典名著内容...
+                <div class="navbar-tagline">让经典文学焕发新生 · 智能改写，保留神韵</div>
+            </div>
+        </nav>
 
-示例：
-第一回 宴桃园豪杰三结义 斩黄巾英雄首立功
-
-话说天下大势，分久必合，合久必分。周末七国分争，并入于秦。及秦灭之后，楚、汉分争，又并入于汉..."></textarea>
-                <div class="text-info">
-                    <span id="char-count">0</span> 字
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 输入卡片 -->
+            <section class="card input-card">
+                <div class="card-header">
+                    <span class="card-icon">✍️</span>
+                    <div>
+                        <h2 class="card-title">输入原文</h2>
+                        <p class="card-subtitle">粘贴或上传您想要改写的经典名著内容</p>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <textarea id="input-text" placeholder="在此粘贴或输入要改写的经典名著内容...&#10;&#10;示例：&#10;第一回 宴桃园豪杰三结义 斩黄巾英雄首立功&#10;&#10;话说天下大势，分久必合，合久必分。周末七国分争，并入于秦。及秦灭之后，楚、汉分争，又并入于汉..."></textarea>
+                    <span class="char-count" id="char-count">0 字</span>
+                </div>
+                
+                <div class="btn-group">
+                    <button id="btn-paste" class="btn btn-secondary">
+                        <span class="btn-icon">📋</span>
+                        粘贴文本
+                    </button>
+                    <button id="btn-upload" class="btn btn-secondary">
+                        <span class="btn-icon">📁</span>
+                        上传文件
+                    </button>
+                    <input type="file" id="file-input" accept=".txt" style="display: none;">
                 </div>
             </section>
 
-            <!-- 风格选择 -->
-            <section class="section style-section">
-                <h2>🎨 选择改写风格（可多选）</h2>
+            <!-- 风格选择卡片 -->
+            <section class="card style-card">
+                <div class="card-header">
+                    <span class="card-icon">🎨</span>
+                    <div>
+                        <h2 class="card-title">选择改写风格</h2>
+                        <p class="card-subtitle">可选择一种或多种风格进行改写</p>
+                    </div>
+                </div>
+                
                 <div class="style-grid" id="style-grid">
                     <!-- 风格选项将通过 JS 动态生成 -->
                 </div>
             </section>
 
             <!-- 操作按钮 -->
-            <section class="section action-section">
-                <button id="btn-rewrite" class="btn btn-large btn-success">
-                    ✨ 开始改写
+            <div class="btn-group" style="justify-content: center; margin-bottom: 30px;">
+                <button id="btn-rewrite" class="btn btn-success">
+                    <span class="btn-icon">✨</span>
+                    开始改写
                 </button>
                 <button id="btn-clear" class="btn btn-danger">
-                    🗑️ 清空
+                    <span class="btn-icon">🗑️</span>
+                    清空
                 </button>
-            </section>
-
-            <!-- 加载状态 -->
-            <div id="loading" class="loading" style="display: none;">
-                <div class="spinner"></div>
-                <p>正在改写中，请稍候...</p>
             </div>
 
-            <!-- 结果区域 -->
-            <section class="section result-section" id="result-section" style="display: none;">
-                <h2>📖 改写结果</h2>
-                <div class="result-header">
-                    <span id="result-info"></span>
-                    <button id="btn-copy" class="btn btn-secondary">📋 复制结果</button>
+            <!-- 结果卡片 -->
+            <section class="card result-card" id="result-section">
+                <div class="card-header">
+                    <span class="card-icon">📖</span>
+                    <div>
+                        <h2 class="card-title">改写结果</h2>
+                        <p class="card-subtitle" id="result-info"></p>
+                    </div>
                 </div>
+                
+                <div class="result-header">
+                    <div class="result-stats" id="result-stats">
+                        <!-- 统计信息将通过 JS 动态生成 -->
+                    </div>
+                    <button id="btn-copy" class="btn btn-secondary">
+                        <span class="btn-icon">📋</span>
+                        复制全部结果
+                    </button>
+                </div>
+                
                 <div id="result-content" class="result-content">
                     <!-- 改写结果将显示在这里 -->
                 </div>
             </section>
         </main>
 
-        <footer>
-            <p>名著改写器 - LLM 应用开发实战项目</p>
-            <p>基于 通义千问 API 构建</p>
+        <!-- 加载状态 -->
+        <div class="loading-overlay" id="loading">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">正在改写中，请稍候...</p>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">📚 名著改写器</div>
+                <div class="footer-desc">LLM 应用开发实战项目 · 基于通义千问 API 构建</div>
+            </div>
         </footer>
     </div>
 
