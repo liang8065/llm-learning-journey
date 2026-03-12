@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名著改写器 - 经典文学风格转换</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 名著改写器</h1>
+            <p class="subtitle">让经典文学焕发新生</p>
+        </header>
+
+        <main>
+            <!-- 输入区域 -->
+            <section class="section input-section">
+                <h2>📝 输入原文</h2>
+                <div class="input-options">
+                    <button id="btn-paste" class="btn btn-primary">粘贴文本</button>
+                    <button id="btn-upload" class="btn btn-secondary">上传文件</button>
+                    <input type="file" id="file-input" accept=".txt" style="display: none;">
+                </div>
+                <textarea id="input-text" placeholder="在此粘贴或输入要改写的经典名著内容...
+
+示例：
+第一回 宴桃园豪杰三结义 斩黄巾英雄首立功
+
+话说天下大势，分久必合，合久必分。周末七国分争，并入于秦。及秦灭之后，楚、汉分争，又并入于汉..."></textarea>
+                <div class="text-info">
+                    <span id="char-count">0</span> 字
+                </div>
+            </section>
+
+            <!-- 风格选择 -->
+            <section class="section style-section">
+                <h2>🎨 选择改写风格（可多选）</h2>
+                <div class="style-grid" id="style-grid">
+                    <!-- 风格选项将通过 JS 动态生成 -->
+                </div>
+            </section>
+
+            <!-- 操作按钮 -->
+            <section class="section action-section">
+                <button id="btn-rewrite" class="btn btn-large btn-success">
+                    ✨ 开始改写
+                </button>
+                <button id="btn-clear" class="btn btn-danger">
+                    🗑️ 清空
+                </button>
+            </section>
+
+            <!-- 加载状态 -->
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>正在改写中，请稍候...</p>
+            </div>
+
+            <!-- 结果区域 -->
+            <section class="section result-section" id="result-section" style="display: none;">
+                <h2>📖 改写结果</h2>
+                <div class="result-header">
+                    <span id="result-info"></span>
+                    <button id="btn-copy" class="btn btn-secondary">📋 复制结果</button>
+                </div>
+                <div id="result-content" class="result-content">
+                    <!-- 改写结果将显示在这里 -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>名著改写器 - LLM 应用开发实战项目</p>
+            <p>基于 通义千问 API 构建</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
