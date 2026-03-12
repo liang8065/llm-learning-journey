@@ -26,6 +26,7 @@ const loading = document.getElementById('loading');
 const resultSection = document.getElementById('result-section');
 const resultContent = document.getElementById('result-content');
 const resultInfo = document.getElementById('result-info');
+const resultStats = document.getElementById('result-stats');
 
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,10 +43,12 @@ async function loadStyles() {
         if (data.success) {
             styles = data.styles;
             renderStyles();
+        } else {
+            throw new Error(data.error || '加载风格失败');
         }
     } catch (error) {
         console.error('加载风格失败:', error);
-        styleGrid.innerHTML = '<p style="color: red;">加载风格失败，请刷新页面重试</p>';
+        styleGrid.innerHTML = '<p style="color: var(--error); grid-column: 1/-1; text-align: center;">加载风格失败，请刷新页面重试</p>';
     }
 }
 
@@ -53,8 +56,8 @@ async function loadStyles() {
 function renderStyles() {
     styleGrid.innerHTML = styles.map(style => `
         <div class="style-item" data-style="${style.id}">
-            <span class="emoji">${style.emoji}</span>
-            <div>
+            <span class="style-emoji">${style.emoji}</span>
+            <div class="style-info">
                 <div class="style-name">${style.name}</div>
                 <div class="style-desc">${style.description}</div>
             </div>
@@ -84,7 +87,8 @@ function toggleStyle(item) {
 function setupEventListeners() {
     // 字数统计
     inputText.addEventListener('input', () => {
-        charCount.textContent = inputText.value.length;
+        const count = inputText.value.length;
+        charCount.textContent = `${count} 字`;
     });
     
     // 粘贴按钮
@@ -92,9 +96,10 @@ function setupEventListeners() {
         try {
             const text = await navigator.clipboard.readText();
             inputText.value = text;
-            charCount.textContent = text.length;
+            charCount.textContent = `${text.length} 字`;
+            showNotification('已从剪贴板粘贴', 'success');
         } catch (error) {
-            alert('无法读取剪贴板，请手动粘贴');
+            showNotification('无法读取剪贴板，请手动粘贴', 'warning');
         }
     });
     
@@ -120,13 +125,17 @@ function setupEventListeners() {
             
             if (data.success) {
                 inputText.value = data.content;
-                charCount.textContent = data.content.length;
+                charCount.textContent = `${data.content.length} 字`;
+                showNotification(`文件 "${file.filename}" 上传成功`, 'success');
             } else {
-                alert('上传失败: ' + data.error);
+                showNotification('上传失败: ' + data.error, 'error');
             }
         } catch (error) {
-            alert('上传失败: ' + error.message);
+            showNotification('上传失败: ' + error.message, 'error');
         }
+        
+        // 重置文件输入
+        fileInput.value = '';
     });
     
     // 改写按钮
@@ -135,24 +144,28 @@ function setupEventListeners() {
     // 清空按钮
     btnClear.addEventListener('click', () => {
         inputText.value = '';
-        charCount.textContent = '0';
-        resultSection.style.display = 'none';
+        charCount.textContent = '0 字';
+        resultSection.classList.remove('active');
         resultContent.innerHTML = '';
+        resultStats.innerHTML = '';
         document.querySelectorAll('.style-item').forEach(item => {
             item.classList.remove('selected');
         });
         selectedStyles = [];
+        showNotification('已清空', 'info');
     });
     
     // 复制按钮
     btnCopy.addEventListener('click', () => {
         const text = resultContent.textContent;
         navigator.clipboard.writeText(text).then(() => {
-            const originalText = btnCopy.textContent;
-            btnCopy.textContent = '✅ 已复制';
+            const originalText = btnCopy.innerHTML;
+            btnCopy.innerHTML = '<span class="btn-icon">✅</span> 已复制';
             setTimeout(() => {
-                btnCopy.textContent = originalText;
+                btnCopy.innerHTML = originalText;
             }, 2000);
+        }).catch(() => {
+            showNotification('复制失败，请手动选择复制', 'error');
         });
     });
 }
@@ -162,18 +175,18 @@ async function rewrite() {
     const text = inputText.value.trim();
     
     if (!text) {
-        alert('请输入要改写的文本');
+        showNotification('请输入要改写的文本', 'warning');
         return;
     }
     
     if (selectedStyles.length === 0) {
-        alert('请至少选择一种改写风格');
+        showNotification('请至少选择一种改写风格', 'warning');
         return;
     }
     
     // 显示加载状态
-    loading.style.display = 'block';
-    resultSection.style.display = 'none';
+    loading.classList.add('active');
+    resultSection.classList.remove('active');
     btnRewrite.disabled = true;
     
     try {
@@ -203,47 +216,142 @@ async function rewrite() {
         
         // 显示结果
         displayResults(results, text.length);
+        showNotification('改写完成！', 'success');
         
     } catch (error) {
-        alert('改写失败: ' + error.message);
+        showNotification('改写失败: ' + error.message, 'error');
     } finally {
-        loading.style.display = 'none';
+        loading.classList.remove('active');
         btnRewrite.disabled = false;
     }
 }
 
 // 显示结果
 function displayResults(results, originalLength) {
-    resultSection.style.display = 'block';
+    resultSection.classList.add('active');
+    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     
     const successCount = results.filter(r => r.success).length;
-    resultInfo.textContent = `完成 ${successCount}/${results.length} 种风格改写 | 原文 ${originalLength} 字`;
+    resultInfo.textContent = `完成 ${successCount}/${results.length} 种风格改写`;
+    
+    // 统计信息
+    let totalRewritten = 0;
+    results.forEach(r => {
+        if (r.success && r.rewritten_length) {
+            totalRewritten += r.rewritten_length;
+        }
+    });
+    
+    resultStats.innerHTML = `
+        <div class="stat-item">
+            <span>📝</span>
+            <span>原文 <span class="stat-value">${originalLength}</span> 字</span>
+        </div>
+        <div class="stat-item">
+            <span>✨</span>
+            <span>改写 <span class="stat-value">${totalRewritten}</span> 字</span>
+        </div>
+        <div class="stat-item">
+            <span>🎯</span>
+            <span>成功 <span class="stat-value">${successCount}</span> 种</span>
+        </div>
+    `;
     
     let html = '';
     
     for (const result of results) {
         if (result.success) {
             html += `
-                <div class="result-item">
-                    <h3>${result.emoji} ${result.styleName}风格</h3>
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 10px;">
-                        改写长度: ${result.rewritten_length} 字 | 模型: ${result.model}
-                    </p>
+                <div class="result-item fade-in">
+                    <div class="result-item-header">
+                        <span style="font-size: 1.3rem;">${result.emoji}</span>
+                        <span class="result-item-title">${result.styleName}风格</span>
+                        <div class="result-meta">
+                            <span>📝 ${result.rewritten_length || '-'} 字</span>
+                            <span>🤖 ${result.model || 'qwen-plus'}</span>
+                        </div>
+                    </div>
                     <div class="result-text">${escapeHtml(result.content)}</div>
                 </div>
-                <hr style="margin: 20px 0; border: none; border-top: 1px solid #e0e0e0;">
             `;
         } else {
             html += `
-                <div class="result-item error">
-                    <h3>${result.emoji} ${result.styleName}风格</h3>
-                    <p style="color: #dc3545;">❌ 改写失败: ${result.error || '未知错误'}</p>
+                <div class="result-item error fade-in">
+                    <div class="result-item-header">
+                        <span style="font-size: 1.3rem;">${result.emoji}</span>
+                        <span class="result-item-title">${result.styleName}风格</span>
+                    </div>
+                    <p class="result-error">❌ 改写失败: ${result.error || '未知错误'}</p>
                 </div>
             `;
         }
     }
     
     resultContent.innerHTML = html;
+}
+
+// 显示通知
+function showNotification(message, type = 'info') {
+    // 创建通知元素
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+        animation: slideIn 0.3s ease;
+        max-width: 300px;
+    `;
+    
+    // 根据类型设置颜色
+    const colors = {
+        success: '#4CAF50',
+        error: '#F44336',
+        warning: '#FF9800',
+        info: '#8B4513'
+    };
+    
+    const icons = {
+        success: '✅',
+        error: '❌',
+        warning: '⚠️',
+        info: 'ℹ️'
+    };
+    
+    notification.style.borderLeft = `4px solid ${colors[type]}`;
+    notification.innerHTML = `<span>${icons[type]}</span><span>${message}</span>`;
+    
+    document.body.appendChild(notification);
+    
+    // 添加动画样式
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // 3秒后移除
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
 }
 
 // HTML 转义
