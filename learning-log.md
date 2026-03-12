@@ -35,6 +35,7 @@
 ### 🔗 相关文件
 - 完整学习内容: [week-01/day-01/Day1-学习内容.md](week-01/day-01/Day1-学习内容.md)
 - LLM日报 (2026-03-12): [reports/2026-03-12-llm-daily-report.md](reports/2026-03-12-llm-daily-report.md)
+- LLM学习资源大全: [resources/llm-learning-resources.md](resources/llm-learning-resources.md)
 - GitHub仓库: https://github.com/liang8065/llm-learning-journey
 
 ---
