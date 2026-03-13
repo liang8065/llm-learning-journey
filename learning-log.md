@@ -42,6 +42,42 @@
 
 ---
 
+## Day 2 (2026-03-13) 🎯
+
+### 📋 今日任务
+1. **Prompt Engineering 深入学习** (30分钟) — Few-shot、Chain-of-Thought、System Prompt等高级技巧
+2. **LangChain 入门** (30分钟) — Chain、Memory、OutputParser核心概念
+3. **名著改写器测试与优化** (30分钟) — 测试已部署服务，记录改进点
+4. **学习笔记 & GitHub 更新** (15分钟) — 整理笔记，更新仓库
+
+### ✅ 完成情况
+- [x] Prompt Engineering深入学习 — ✅ 已完成（Few-shot、CoT、System Prompt）
+- [x] LangChain入门 — ✅ 已完成（Chain、Memory、OutputParser）
+- [x] 名著改写器测试 — ⏳ 待完成（用户将进行实际测试）
+- [x] 学习笔记 & GitHub更新 — ✅ 已完成（已上传Day 2内容）
+
+### 📝 今日笔记
+- 完整学习内容已整理为独立文件: [week-01/day-02/Day2-学习内容.md](week-01/day-02/Day2-学习内容.md)
+- 学习内容包含：Prompt Engineering详解（Few-shot/CoT/System Prompt）、LangChain核心概念（Chain/Memory/OutputParser）、名著改写器测试方案
+- Day 2重点：深化Prompt技能 → 掌握LangChain → 实战验证项目
+
+### 💡 收获与反思
+- Day 2 在Day 1基础上深化Prompt工程和框架理解
+- LangChain是LLM应用开发的核心框架，需要持续实践
+- 名著改写器项目是一个很好的实战案例，边学边用效果更好
+- 明天（Day 3）将继续LangChain实践，探索RAG基础
+
+### ⏰ 用时统计
+- 计划用时：~1.75小时
+- 实际用时：（待记录）
+
+### 🔗 相关文件
+- 完整学习内容: [week-01/day-02/Day2-学习内容.md](week-01/day-02/Day2-学习内容.md)
+- GitHub仓库: https://github.com/liang8065/llm-learning-journey
+- 名著改写器服务: http://47.102.222.123:5000
+
+---
+
 ## 模板：后续日志格式
 
 ### Day N (YYYY-MM-DD) 🎯
