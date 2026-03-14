@@ -7,7 +7,8 @@
 - **开始日期**: 2026年3月12日
 - **目标**: 3个月内成为 LLM 应用开发专家
 - **每日投入**: 1-2小时
-- **当前阶段**: 入门阶段（Day 2）
+- **当前阶段**: 入门阶段（Day 3）
+- **重要约定**: 所有学习计划推送前必须细化，LangChain 使用 **1.0+ 版本**
 
 ## 🎯 学习目标
 
@@ -23,29 +24,36 @@
 - [x] 核心概念学习（LLM、Token、Prompt、Embedding、RAG）
 - [x] 第一个API调用（通义千问）
 - [x] 入门文档阅读与笔记整理
+- [x] Prompt Engineering 深入学习（Few-shot、CoT、System Prompt）
+- [x] LangChain 1.0+ 入门（LCEL、Memory、OutputParser）
+- [x] 名著改写器测试
+- [x] 学习笔记 & GitHub 更新
 
-### 🎉 Day 1 全部完成！
+### 🎉 Day 2 全部完成！
 
-四项任务全部完成，API调用使用通义千问，Day 1 圆满结束！
-Day 2 将继续深入核心概念并开始 RAG 入门。
+Day 2 已完成：Prompt Engineering 深入学习、LangChain 1.0+ 入门、名著改写器测试方案。
+**重要约定**: 以后所有学习计划推送前必须细化，LangChain 使用 1.0+ 版本。
 
 ## 📁 项目结构
 
 ```
 llm-learning-journey/
-├── README.md           # 项目概览（本文件）
-├── week-01/            # 第1周
-│   └── day-01/         # 每日记录
-├── week-02/            # 第2周
-├── ...                 # 按周组织
-├── docs/               # 学习笔记和文档
-├── resources/          # 收集的资源链接
-├── classic-rewriter/   # 🆕 名著改写器项目（LLM实战项目）
-│   ├── backend/        # 后端服务（Flask + 通义千问）
-│   ├── frontend/       # 前端界面（HTML/CSS/JS）
-│   └── README.md       # 项目说明
-├── reports/            # 每日报告
-└── learning-log.md     # 每日学习日志（汇总）
+├── README.md                  # 项目概览（本文件）
+├── REFINED-LEARNING-PLAN.md   # 🆕 细化学习计划 v2.0（完整3个月计划）
+├── learning-log.md            # 每日学习日志（汇总）
+├── week-01/                   # 第1周
+│   ├── day-01/                # Day 1 记录
+│   └── day-02/                # Day 2 记录
+├── week-02/                   # 第2周
+├── ...                        # 按周组织
+├── docs/                      # 学习笔记和文档
+├── resources/                 # 收集的资源链接
+├── classic-rewriter/          # 名著改写器项目（LLM实战项目）
+│   ├── backend/               # 后端服务（Flask + 通义千问）
+│   ├── frontend/              # 前端界面（HTML/CSS/JS）
+│   └── README.md              # 项目说明
+├── reports/                   # 每日报告
+└── memory/                    # 进度追踪文件
 ```
 
 ## 🚀 实战项目
@@ -72,18 +80,32 @@ llm-learning-journey/
 
 - [OpenAI Python SDK](https://platform.openai.com/docs/quickstart)
 - [Prompt Engineering Guide](https://www.promptingguide.ai/zh)
-- [LangChain 入门](https://python.langchain.com/docs/get_started/introduction)
+- [LangChain 1.0+ 官方文档](https://python.langchain.com/docs/get_started/introduction)
+- [LangChain 1.0+ API 参考](https://api.python.langchain.com/en/latest/)
 - [通义千问 API](https://help.aliyun.com/zh/dashscope/)
 
 ## 📝 学习日志
 
-### Day 1 (2026-03-12)
-- ✅ 收到学习计划，开始第一天的学习
-- ✅ 环境搭建任务
-- ⏳ 核心概念学习
-- ⏳ 第一个API调用
+### Day 1 (2026-03-12) ✅
+- ✅ 环境搭建
+- ✅ 核心概念学习
+- ✅ 第一个API调用（通义千问）
+- ✅ 入门文档阅读与笔记整理
 
-> 详细记录见 [week-01/day-01/](week-01/day-01/)
+### Day 2 (2026-03-13) ✅
+- ✅ Prompt Engineering 深入学习（Few-shot、CoT、System Prompt）
+- ✅ LangChain 1.0+ 入门（LCEL、Memory、OutputParser）
+- ⏳ 名著改写器测试（待用户完成）
+- ✅ 学习笔记 & GitHub 更新
+
+### Day 3 (2026-03-14) 🎯
+- ⏳ LangChain 1.0+ LCEL 深度实践
+- ⏳ RAG（检索增强生成）基础
+- ⏳ 实战：构建简单 RAG 问答系统
+- ⏳ GitHub 更新 & 学习笔记
+
+> 详细记录见 [learning-log.md](learning-log.md)
+> 细化学习计划见 [REFINED-LEARNING-PLAN.md](REFINED-LEARNING-PLAN.md)
 
 ---
 
