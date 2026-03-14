@@ -1,6 +1,7 @@
 # 📖 学习日志 - LLM 应用开发之旅
 
 > 记录每一天的学习进展、收获和反思
+> **重要约定**: 所有学习计划推送前必须细化，LangChain 使用 1.0+ 版本。详见 [REFINED-LEARNING-PLAN.md](REFINED-LEARNING-PLAN.md)
 
 ---
 
@@ -46,26 +47,28 @@
 
 ### 📋 今日任务
 1. **Prompt Engineering 深入学习** (30分钟) — Few-shot、Chain-of-Thought、System Prompt等高级技巧
-2. **LangChain 入门** (30分钟) — Chain、Memory、OutputParser核心概念
+2. **LangChain 1.0+ 入门** (30分钟) — Chain、Memory、OutputParser核心概念（使用1.0+ API）
 3. **名著改写器测试与优化** (30分钟) — 测试已部署服务，记录改进点
 4. **学习笔记 & GitHub 更新** (15分钟) — 整理笔记，更新仓库
 
 ### ✅ 完成情况
 - [x] Prompt Engineering深入学习 — ✅ 已完成（Few-shot、CoT、System Prompt）
-- [x] LangChain入门 — ✅ 已完成（Chain、Memory、OutputParser）
+- [x] LangChain 1.0+ 入门 — ✅ 已完成（Chain、Memory、OutputParser，使用LCEL）
 - [x] 名著改写器测试 — ⏳ 待完成（用户将进行实际测试）
 - [x] 学习笔记 & GitHub更新 — ✅ 已完成（已上传Day 2内容）
 
 ### 📝 今日笔记
 - 完整学习内容已整理为独立文件: [week-01/day-02/Day2-学习内容.md](week-01/day-02/Day2-学习内容.md)
-- 学习内容包含：Prompt Engineering详解（Few-shot/CoT/System Prompt）、LangChain核心概念（Chain/Memory/OutputParser）、名著改写器测试方案
-- Day 2重点：深化Prompt技能 → 掌握LangChain → 实战验证项目
+- 学习内容包含：Prompt Engineering详解（Few-shot/CoT/System Prompt）、LangChain 1.0+核心概念（LCEL/RunnableWithMessageHistory/JsonOutputParser）、名著改写器测试方案
+- Day 2重点：深化Prompt技能 → 掌握LangChain 1.0+ → 实战验证项目
+- **LangChain 1.0+ 迁移完成**: LLMChain → LCEL, ConversationChain → RunnableWithMessageHistory, StructuredOutputParser → JsonOutputParser + Pydantic
 
 ### 💡 收获与反思
 - Day 2 在Day 1基础上深化Prompt工程和框架理解
-- LangChain是LLM应用开发的核心框架，需要持续实践
+- LangChain 1.0+ 是LLM应用开发的核心框架，需要持续实践
 - 名著改写器项目是一个很好的实战案例，边学边用效果更好
-- 明天（Day 3）将继续LangChain实践，探索RAG基础
+- **重要约定**: 以后所有学习计划推送前必须细化，LangChain 使用 1.0+ 版本
+- 明天（Day 3）将继续LangChain 1.0+实践，探索RAG基础
 
 ### ⏰ 用时统计
 - 计划用时：~1.75小时
@@ -73,8 +76,39 @@
 
 ### 🔗 相关文件
 - 完整学习内容: [week-01/day-02/Day2-学习内容.md](week-01/day-02/Day2-学习内容.md)
+- **细化学习计划**: [REFINED-LEARNING-PLAN.md](REFINED-LEARNING-PLAN.md)
 - GitHub仓库: https://github.com/liang8065/llm-learning-journey
 - 名著改写器服务: http://47.102.222.123:5000
+
+---
+
+## Day 3 (2026-03-14) 🎯
+
+### 📋 今日任务
+1. **LangChain 1.0+ LCEL 深度实践** (30分钟) — RunnableParallel、RunnableLambda、RunnableBranch
+2. **RAG（检索增强生成）基础** (30分钟) — 理解RAG原理、文档加载器、文本分割器、向量存储基础
+3. **实战：构建简单RAG问答系统** (30分钟) — 使用LangChain 1.0+构建基于文档的问答系统
+4. **GitHub 更新 & 学习笔记** (15分钟) — 更新learning-log.md，推送细化学习计划
+
+### ✅ 完成情况
+- [ ] LangChain 1.0+ LCEL 深度实践
+- [ ] RAG 基础学习
+- [ ] 实战：RAG问答系统
+- [ ] GitHub 更新 & 学习笔记
+
+### 📝 今日笔记
+- （待记录）
+
+### 💡 收获与反思
+- （待记录）
+
+### ⏰ 用时统计
+- 计划用时：~1.5小时
+- 实际用时：（待记录）
+
+### 🔗 相关文件
+- **细化学习计划**: [REFINED-LEARNING-PLAN.md](REFINED-LEARNING-PLAN.md)
+- GitHub仓库: https://github.com/liang8065/llm-learning-journey
 
 ---
 
@@ -103,3 +137,8 @@
 
 **用时统计**
 - 实际用时：X小时
+
+**重要约定**
+- 所有学习计划推送前必须细化
+- LangChain 使用 1.0+ 版本
+- 推送到 GitHub 仓库: liang8065/llm-learning-journey
